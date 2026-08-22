@@ -1,0 +1,6 @@
+{
+  "name": "Kindred Cards",
+  "description": "Create and schedule personalized handmade caricature greeting cards to send from your own email or export for posts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
