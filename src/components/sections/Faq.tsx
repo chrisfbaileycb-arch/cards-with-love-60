@@ -1,56 +1,48 @@
 import React, { useState } from 'react';
-import { Minus, Plus } from 'lucide-react';
+import { Minus, Plus, HelpCircle } from 'lucide-react';
 
 const FAQS = [
   {
-    q: 'Do I need an email API key or an email service?',
-    a: 'You do not need an email API key. When a card is ready, the studio hands the finished PNG to your phone\u2019s share sheet or opens a pre-filled draft in your own mail app — Gmail, Outlook, Apple Mail, whatever you already use. You press send, so it comes from your real address. AI artwork generation is separate and may use plan credits.'
+    q: 'How does the 3-click cartoon generation process work?',
+    a: 'Step 1: Describe your idea or paste your script and pick your cartoon duration (30s, 60s, or 90s). Step 2: LovAnimate orchestrates character anchor consistency, scene visuals, and voiceover dialogue. Step 3: Download your HD storyboard, video sequence, or share directly!'
   },
   {
-    q: 'Is the caricature animated in any way?',
-    a: 'No. Every card is a single static PNG at 900 × 1200 pixels. Nothing dances, blinks or wiggles — it is a still drawing, like something a street artist handed you.'
+    q: 'What are the Palace Guard character slots?',
+    a: 'Palace Guards are animated character anchor slots flanking the Sanctuary & Studio. They showcase responsive, floating character keyframes that serve as visual anchors for consistent character styles (such as 3D Pixar, 2D Vector, Classic Comic, and Storyboard Pencil) across all scenes.'
   },
   {
-    q: 'What happens to the photo I upload?',
-    a: 'Your photo stays in the browser while you edit. If you choose Draw my caricature, it is sent to the app\u2019s AI generation service to create the artwork. Finished card images can be stored in your private library for re-use; they are not published as a public post by Kindred.'
+    q: 'Can I customize scene dialogue and camera actions after generation?',
+    a: 'Absolutely! In Step 2 (Script & Scene Review), you can edit dialogue lines, modify visual prompts, tweak sound FX cues, regenerate individual scenes, or upload custom reference images.'
   },
   {
-    q: 'How does scheduling work without a server sending for me?',
-    a: 'Your send calendar keeps the card, the note and the address prepared. On the day, open the Send calendar and hit "Send from my email" — one tap and the draft is already written and addressed. Mark it sent, or push it a day if life happens.'
+    q: 'What aspect ratios are supported?',
+    a: 'You can export in standard widescreen landscape (16:9) for YouTube & presentations, vertical portrait (9:16) for Instagram Reels & TikTok, or square (1:1) for social feed carousels.'
   },
   {
-    q: 'Can I use this for clients as well as family?',
-    a: 'That is exactly the idea. Tag someone as a client, pick the Client Appreciation template, and work through a small list a handful at a time. It stays personal because every card leaves your own mailbox, one at a time — not a blast.'
-  },
-  {
-    q: 'Can I post the card on Facebook or Instagram instead?',
-    a: 'Yes. Export it as a 1:1 square for a feed post, 9:16 for a story or Reel cover, or 16:9 for a banner or listing flyer. There are no social connectors on purpose — you download the image and upload it yourself.'
-  },
-  {
-    q: 'Can I print the card instead of emailing it?',
-    a: 'Download the PNG and send it to any print shop or home printer. At 900 × 1200 it prints crisply at roughly 5 × 7 inches.'
+    q: 'Are there hidden subscription traps or complex email schedulers?',
+    a: 'None! LovAnimate puts you in direct creative control. You can generate, preview in the interactive story player, and download high-resolution assets directly to your device with zero friction.'
   }
 ];
-
 
 const Faq: React.FC = () => {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="bg-[#FDFBF7] py-16 sm:py-24">
+    <section id="faq" className="bg-[#FFFDF9] py-16 sm:py-24 border-t border-[#EDE4D3]">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-[0.28em] text-[#A4794A]">Good to know</span>
-          <h2 className="mt-3 font-serif text-3xl leading-tight text-[#2C2A29] sm:text-4xl">
-            The small print, written like a human.
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#FFF8EE] px-3.5 py-1 text-xs font-['Fredoka',sans-serif] font-bold uppercase tracking-wider text-[#A4794A] border border-[#E8DEC9]">
+            <HelpCircle className="h-3.5 w-3.5" /> Good to Know
+          </span>
+          <h2 className="mt-3 font-['Fredoka',sans-serif] text-3xl font-bold leading-tight text-[#1F1D1B] sm:text-4xl">
+            Frequently Asked Questions
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-[#7c7266]">
-            No subscriptions to decode, no social logins, no "engagement". Just a card, a date, and a person who will
-            be glad you thought of them.
+          <p className="mt-3 text-sm leading-relaxed text-[#6D6459] font-medium">
+            Everything you need to know about directing your own animated shorts with LovAnimate.
           </p>
         </div>
 
-        <div className="divide-y divide-[#eee5d8] rounded-3xl border border-[#e6dccb] bg-white px-2 shadow-sm">
+        <div className="divide-y divide-[#EDE4D3] rounded-3xl border-2 border-[#EDE4D3] bg-white px-2 shadow-xs">
           {FAQS.map((item, i) => {
             const isOpen = open === i;
             return (
@@ -60,12 +52,12 @@ const Faq: React.FC = () => {
                   aria-expanded={isOpen}
                   className="flex w-full items-center justify-between gap-4 py-5 text-left"
                 >
-                  <span className="text-sm font-semibold text-[#2C2A29]">{item.q}</span>
-                  <span className="flex h-7 w-7 flex-none items-center justify-center rounded-full border border-[#e0d5c2] text-[#A4794A]">
+                  <span className="text-sm font-['Fredoka',sans-serif] font-bold text-[#1F1D1B]">{item.q}</span>
+                  <span className="flex h-7 w-7 flex-none items-center justify-center rounded-full border border-[#EDE4D3] bg-[#FAF7F0] text-[#E11D48] transition-transform">
                     {isOpen ? <Minus className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
                   </span>
                 </button>
-                {isOpen && <p className="-mt-1 pb-5 pr-10 text-sm leading-relaxed text-[#7c7266]">{item.a}</p>}
+                {isOpen && <p className="-mt-1 pb-5 pr-10 text-xs leading-relaxed text-[#6D6459] font-medium">{item.a}</p>}
               </div>
             );
           })}

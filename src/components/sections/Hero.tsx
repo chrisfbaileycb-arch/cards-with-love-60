@@ -1,83 +1,269 @@
 import React from 'react';
-import { BRAND, HERO_IMAGE } from '@/data/cardConfig';
-import { ArrowRight, CalendarClock, KeyRound, PenLine, Sparkles } from 'lucide-react';
+import { ArrowRight, Heart, Sparkles, UtensilsCrossed, Wand2, Play, Flame, Film, BookOpen, Star } from 'lucide-react';
+import PalaceGuardSlot from '@/components/character/PalaceGuardSlot';
+
+interface HeroProps {
+  onSelectTemplate?: (premise: string) => void;
+  leftGuardMediaUrl?: string;
+  rightGuardMediaUrl?: string;
+}
+
+const TEMPLATE_PRESETS = [
+  {
+    icon: Heart,
+    label: 'First Date in Rain',
+    badge: 'Love & Romance',
+    accent: '#E11D48',
+    bg: '#FFE4E6',
+    border: '#FECDD3',
+    premise: 'Re-enact your first date with your wife at the little Italian bistro in the rain, LovAnimate it.'
+  },
+  {
+    icon: UtensilsCrossed,
+    label: 'Flaming Pasta',
+    badge: 'Chef Specialty',
+    accent: '#D97706',
+    bg: '#FEF3C7',
+    border: '#FDE68A',
+    premise: 'Your favorite specialty dish at your restaurant sizzling with secret herbs and spices, LovAnimate it.'
+  },
+  {
+    icon: Sparkles,
+    label: 'Vision of Faith',
+    badge: 'Faith & Wonder',
+    accent: '#4F46E5',
+    bg: '#EEF2FF',
+    border: '#C7D2FE',
+    premise: 'Your vision of faith: walking through life’s storms guided by steady light and gentle grace, LovAnimate it.'
+  },
+  {
+    icon: Wand2,
+    label: 'Superpup Max',
+    badge: 'Best Friend',
+    accent: '#059669',
+    bg: '#D1FAE5',
+    border: '#A7F3D0',
+    premise: 'My best friend Max the golden retriever getting his own superpower cape to rescue lost tennis balls, LovAnimate it.'
+  }
+];
+
+const SHOWCASE_TILES = [
+  {
+    title: 'First Date in the Rain',
+    tag: 'Love & Memories',
+    img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80',
+    duration: '01:00'
+  },
+  {
+    title: 'Flaming Truffle Pasta',
+    tag: 'Restaurant Special',
+    img: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80',
+    duration: '00:30'
+  },
+  {
+    title: 'Waves of Faith',
+    tag: 'Vision of Faith',
+    img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80',
+    duration: '01:00'
+  },
+  {
+    title: 'Max Secret Agent Pup',
+    tag: 'Best Friend',
+    img: 'https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=600&q=80',
+    duration: '00:30'
+  },
+  {
+    title: 'Sunday Morning Pancakes',
+    tag: 'Family Story',
+    img: 'https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=600&q=80',
+    duration: '01:00'
+  }
+];
 
 const scrollTo = (href: string) => {
   const el = document.querySelector(href);
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
-const STATS = [
-  { value: 'No email API key', label: 'sends from your own email' },
-  { value: '4 sizes', label: 'card, 1:1, 9:16, 16:9' },
-  { value: '900×1200', label: 'crisp static PNG' }
-];
+const Hero: React.FC<HeroProps> = ({ onSelectTemplate, leftGuardMediaUrl, rightGuardMediaUrl }) => {
+  const handleTemplateClick = (premise: string) => {
+    if (onSelectTemplate) {
+      onSelectTemplate(premise);
+    }
+    scrollTo('#studio');
+  };
 
-const Hero: React.FC = () => (
-  <section className="relative overflow-hidden bg-[#FDFBF7]">
-    <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#f0dfc6] blur-3xl" />
-    <div className="pointer-events-none absolute -bottom-32 left-0 h-72 w-72 rounded-full bg-[#f3dede] blur-3xl" />
+  return (
+    <section className="relative overflow-hidden bg-[#FAF7F0] pt-6 pb-10 sm:pt-10 sm:pb-14">
+      {/* Background ambient whimsical lighting */}
+      <div className="pointer-events-none absolute -right-20 -top-20 h-96 w-96 rounded-full bg-[#FFE4E6]/50 blur-3xl" />
+      <div className="pointer-events-none absolute -left-20 -bottom-20 h-96 w-96 rounded-full bg-[#FEF3C7]/60 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[800px] rounded-full bg-[#FDFBF7] opacity-60 blur-2xl" />
 
-    <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-8 lg:grid-cols-2 lg:py-24">
-      <div>
-        <span className="inline-flex items-center gap-2 rounded-full border border-[#e6dccb] bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#A4794A]">
-          <Sparkles className="h-3.5 w-3.5" /> {BRAND.tagline}
-        </span>
-        <h1 className="mt-6 font-serif text-4xl leading-[1.08] text-[#2C2A29] sm:text-5xl lg:text-6xl">
-          Send love and follow-ups,
-          <span className="block italic text-[#A4794A]">beautifully.</span>
-        </h1>
-        <p className="mt-5 max-w-xl text-base leading-relaxed text-[#6d6459]">
-          Upload a photo, turn it into a warm carnival caricature, stamp it with real handwriting — then send it from
-          your own inbox. A birthday card for your wife on a Tuesday, or a thank-you to the forty people in your
-          pipeline. Same card, your name on it, no marketing machine.
-        </p>
-        <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-[#e7f0e4] px-3 py-1.5 text-xs font-semibold text-[#3d6b46]">
-          <KeyRound className="h-3.5 w-3.5" /> Zero email API keys · nothing to connect · nothing per-email to pay
-        </p>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-8">
+        {/* Story Sanctuary Sanctuary Flanked with Palace Guard Slots */}
+        <div className="relative flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
+          
+          {/* LEFT PALACE GUARD ASSET SLOT */}
+          <div className="hidden lg:flex flex-none w-44 items-center justify-center">
+            <PalaceGuardSlot
+              position="left"
+              name="Sir Quills-a-Lot"
+              roleTitle="The Inking Sentinel"
+              badgeText="🛡️ Inking Sentry"
+              dialogue="Welcome to the Story Sanctuary! Present your memory and I will guard its beauty!"
+              mediaUrl={leftGuardMediaUrl}
+            />
+          </div>
 
-        <div className="mt-8 flex flex-wrap items-center gap-3">
-          <button
-            onClick={() => scrollTo('#studio')}
-            className="inline-flex items-center gap-2 rounded-full bg-[#2C2A29] px-7 py-3.5 text-sm font-semibold text-[#FDFBF7] transition hover:bg-[#413d3a]"
-          >
-            <PenLine className="h-4 w-4" /> Create your card
-          </button>
-          <button
-            onClick={() => scrollTo('#gallery')}
-            className="inline-flex items-center gap-2 rounded-full border border-[#d9cbb6] bg-white px-6 py-3.5 text-sm font-medium text-[#5c5248] transition hover:border-[#c9a273]"
-          >
-            See the card styles <ArrowRight className="h-4 w-4" />
-          </button>
-        </div>
-
-
-        <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-[#eee5d8] pt-6">
-          {STATS.map((s) => (
-            <div key={s.label}>
-              <dt className="font-serif text-xl text-[#2C2A29]">{s.value}</dt>
-              <dd className="text-[11px] uppercase tracking-wide text-[#a49a8d]">{s.label}</dd>
+          {/* MAIN HERO SANCTUARY CENTER */}
+          <div className="flex-1 text-center max-w-3xl mx-auto">
+            {/* Storybook Pill Badge */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#E8DEC9] bg-[#FFF8EE] px-4 py-1.5 text-xs font-['Fredoka',sans-serif] font-bold uppercase tracking-wider text-[#9E651D] shadow-sm">
+              <Sparkles className="h-3.5 w-3.5 text-[#EAB308] animate-star-twinkle" />
+              <span>Story Sanctuary · Animate Any Idea or Memory</span>
             </div>
-          ))}
-        </dl>
-      </div>
 
-      <div className="relative">
-        <div className="overflow-hidden rounded-[28px] border border-[#e6dccb] shadow-[0_40px_80px_-40px_rgba(70,55,35,0.6)]">
-          <img src={HERO_IMAGE} alt="A handmade caricature greeting card on a linen desk" className="w-full object-cover" />
+            <h1 className="mt-4 font-['Fredoka',sans-serif] text-4xl sm:text-6xl font-bold tracking-tight text-[#1F1D1B] leading-[1.12]">
+              Turn Any Story Into <br className="hidden sm:inline" />
+              <span className="text-[#E11D48]">Animated Cartoons</span>{' '}
+              <span className="inline-block rounded-2xl bg-[#FEF3C7] px-3 py-0.5 text-[#92400E] border-2 border-[#FDE68A] shadow-xs">
+                in 3 Clicks
+              </span>
+            </h1>
+
+            <p className="mt-4 text-base sm:text-lg leading-relaxed text-[#6B6155] max-w-2xl mx-auto font-medium">
+              A whimsical, instant animation studio to reach out to people you love, celebrate restaurant specialties, share visions of faith, and bring fairy tales to life.
+            </p>
+
+            {/* Quick Action Buttons */}
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <button
+                onClick={() => scrollTo('#studio')}
+                className="inline-flex items-center gap-2.5 rounded-2xl bg-gradient-to-r from-[#E11D48] to-[#EAB308] px-8 py-3.5 text-sm font-['Fredoka',sans-serif] font-bold uppercase tracking-wider text-white shadow-lg transition hover:scale-105 hover:shadow-xl active:scale-95"
+              >
+                <Wand2 className="h-4 w-4" /> Start Studio in 3 Clicks
+              </button>
+              <button
+                onClick={() => scrollTo('#samples')}
+                className="inline-flex items-center gap-2 rounded-2xl border-2 border-[#DCD0BB] bg-white px-6 py-3.5 text-sm font-['Fredoka',sans-serif] font-semibold text-[#4A4237] shadow-sm transition hover:border-[#E11D48] hover:bg-[#FFFDF9] hover:scale-105"
+              >
+                <Play className="h-4 w-4 text-[#E11D48]" /> Watch Sample Stories
+              </button>
+            </div>
+
+            {/* Collectible Premise Story Badges */}
+            <div className="mt-8 pt-5 border-t border-[#EFE5D5]">
+              <div className="flex items-center justify-center gap-1.5 text-xs font-['Fredoka',sans-serif] font-bold uppercase tracking-wider text-[#9E8E7D] mb-3">
+                <BookOpen className="h-3.5 w-3.5 text-[#EAB308]" />
+                <span>Pick a storybook premise to start:</span>
+              </div>
+              
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 max-w-2xl mx-auto">
+                {TEMPLATE_PRESETS.map((t) => (
+                  <button
+                    key={t.label}
+                    onClick={() => handleTemplateClick(t.premise)}
+                    className="group flex flex-col items-center justify-center rounded-2xl border-2 bg-white p-3 text-center shadow-xs transition hover:scale-105 hover:shadow-md active:scale-95"
+                    style={{ borderColor: t.border }}
+                  >
+                    <span
+                      className="flex h-9 w-9 items-center justify-center rounded-xl transition-transform group-hover:rotate-6"
+                      style={{ backgroundColor: t.bg, color: t.accent }}
+                    >
+                      <t.icon className="h-4 w-4" />
+                    </span>
+                    <span className="mt-1.5 font-['Fredoka',sans-serif] text-xs font-bold text-[#2C2A29] line-clamp-1">
+                      {t.label}
+                    </span>
+                    <span className="text-[10px] font-semibold text-[#8C8071]">
+                      {t.badge}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT PALACE GUARD ASSET SLOT */}
+          <div className="hidden lg:flex flex-none w-44 items-center justify-center">
+            <PalaceGuardSlot
+              position="right"
+              name="Lady Chromata"
+              roleTitle="The Color Paladin"
+              badgeText="✨ Keeper of Colors"
+              dialogue="With my magic palette, your cartoon colors and animations will shine in seconds!"
+              mediaUrl={rightGuardMediaUrl}
+            />
+          </div>
         </div>
-        <div className="absolute -bottom-6 left-4 flex items-center gap-3 rounded-2xl border border-[#e6dccb] bg-white/95 px-4 py-3 shadow-lg sm:left-10">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f3e9d8] text-[#8f6739]">
-            <CalendarClock className="h-4 w-4" />
-          </span>
-          <div>
-            <p className="text-xs font-semibold text-[#2C2A29]">Scheduled: Apr 14, 8:00 AM</p>
-            <p className="text-[11px] text-[#8b8177]">"Just because" → Sarah</p>
+
+        {/* Mobile Palace Guards Bar (visible on small screens) */}
+        <div className="mt-6 flex lg:hidden items-center justify-around rounded-3xl border border-[#E9DEC8] bg-[#FFFDF9] p-4 shadow-sm">
+          <PalaceGuardSlot
+            position="left"
+            name="Sir Quills"
+            roleTitle="Inking Sentry"
+            mediaUrl={leftGuardMediaUrl}
+          />
+          <div className="h-16 w-px bg-[#EFE5D5]" />
+          <PalaceGuardSlot
+            position="right"
+            name="Lady Chromata"
+            roleTitle="Color Paladin"
+            mediaUrl={rightGuardMediaUrl}
+          />
+        </div>
+
+        {/* Bento Showcase Grid with Softened Whimsical Borders */}
+        <div className="mt-8 relative rounded-3xl border-2 border-[#E9DEC8] bg-[#1F1D1B] p-4 sm:p-6 shadow-2xl overflow-hidden">
+          {/* Top Banner Tag */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none">
+            <div className="rounded-2xl border-2 border-white/20 bg-black/85 backdrop-blur-md px-6 py-3 shadow-2xl text-center">
+              <span className="font-['Fredoka',sans-serif] text-xl sm:text-2xl font-bold tracking-wide text-white flex items-center gap-2">
+                <Star className="h-4 w-4 fill-[#EAB308] text-[#EAB308] animate-star-twinkle" />
+                <span>Made with <span className="text-[#E11D48]">Lov</span><span className="text-[#EAB308]">Animate</span></span>
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 opacity-90 hover:opacity-100 transition duration-500">
+            {SHOWCASE_TILES.map((tile) => (
+              <div
+                key={tile.title}
+                onClick={() => scrollTo('#samples')}
+                className="group relative cursor-pointer overflow-hidden rounded-2xl border border-[#383431] bg-[#292624] aspect-[4/3] sm:aspect-[3/4] transition duration-300 hover:scale-[1.03] hover:border-[#EAB308]"
+              >
+                <img
+                  src={tile.img}
+                  alt={tile.title}
+                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                
+                <span className="absolute top-2.5 left-2.5 rounded-full bg-black/65 backdrop-blur-xs px-2.5 py-0.5 text-[10px] font-['Fredoka',sans-serif] font-bold uppercase tracking-wider text-[#EAB308]">
+                  {tile.tag}
+                </span>
+
+                <span className="absolute top-2.5 right-2.5 rounded-md bg-black/70 px-2 py-0.5 text-[10px] font-semibold text-white/90">
+                  {tile.duration}
+                </span>
+
+                <div className="absolute bottom-3 left-3 right-3">
+                  <p className="text-xs font-['Fredoka',sans-serif] font-bold text-white line-clamp-1 group-hover:text-[#EAB308] transition">
+                    {tile.title}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default Hero;
+
+

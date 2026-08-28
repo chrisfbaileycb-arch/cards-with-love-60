@@ -1,6 +1,6 @@
 {
-  "name": "Kindred Cards",
-  "description": "Create and schedule personalized handmade caricature greeting cards to send from your own email or export for posts.",
+  "name": "LovAnimate",
+  "description": "Create, animate, and download 30, 60, and 90-second cartoons and storyboards for people you love, restaurant marketing, faith visions, and pure imagination.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
